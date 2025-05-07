@@ -1,0 +1,11 @@
+Column Description
+•	Employee ID: Unique ID of the employee at company XYZ
+•	Name: Name of the employee
+•	GENDER: Gender of the employee
+•	EDU_LVL: Latest education of the employee
+•	JOB_CATEGORY: Position of the employee
+•	AGE: Age of the employee as of 2020-01-01
+•	Score: Performance score of the employee
+•	Number Phone: Phone number of the employee
+•	Domicile Province: Domicile province of the employee
+•	First Day Employment: First date of work
