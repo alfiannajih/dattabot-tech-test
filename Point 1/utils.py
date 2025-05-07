@@ -6,8 +6,7 @@ from random import randint
 import numpy as np
 from random import random
 
-# Function to randomly insert None
-def insert_missing_values(df, column, rate, add_unknown_and_random_str=False):
+def insert_noise_values(df, column, rate, add_unknown_and_random_str=False):
     mask = np.random.rand(len(df)) < rate
     if add_unknown_and_random_str:
         prob = random()
@@ -17,6 +16,7 @@ def insert_missing_values(df, column, rate, add_unknown_and_random_str=False):
             df.loc[mask, column] = "cfasew"
     else:
         df.loc[mask, column] = None
+
 
 def generate_dummy_data_case_1(
     n_rows: int = 100000,
@@ -46,9 +46,38 @@ def generate_dummy_data_case_1(
     df = pd.DataFrame(dummy_data)
 
     for col in ['first_name', 'last_name', 'age', 'country']:
-        insert_missing_values(df, col, noise_rate)
+        insert_noise_values(df, col, noise_rate)
 
     for col in ['age', 'country']:
-        insert_missing_values(df, col, noise_rate)
+        insert_noise_values(df, col, noise_rate, add_unknown_and_random_str=True)
+
+    return df
+
+
+def generate_dummy_data_case_2(
+    n_rows: int = 100000,
+    noise_rate: float = 0.2
+):
+    possible_departments = [
+        "Sales", "Logistics", "Data", "Marketing", "Accounting",
+        "Finance", "IT", "Product" 
+    ]
+
+    dummy_data = []
+    for i in range(n_rows):
+        dummy_data.append({
+            "entry_time": f"{randint(8, 10):02}:{randint(0, 59):02}:{randint(0, 59):02}",
+            "exit_time": f"{randint(16, 18):02}:{randint(0, 59):02}:{randint(0, 59):02}",
+            "break_duration": f"{randint(30, 90)}",
+            "department": possible_departments[randint(0, 7)]
+        })
+
+    df = pd.DataFrame(dummy_data)
+
+    for col in ['entry_time', 'exit_time', 'break_duration', 'department']:
+        insert_noise_values(df, col, noise_rate)
+
+    for col in ['entry_time', 'exit_time', 'break_duration', 'department']:
+        insert_noise_values(df, col, noise_rate, add_unknown_and_random_str=True)
 
     return df
