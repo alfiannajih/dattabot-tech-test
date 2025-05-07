@@ -1,3 +1,7 @@
+from datetime import datetime
+from datetime import timedelta
+import pandas as pd
+
 # CASE 1
 def clean_customer_data(df):
     known_countries = ["US", "UK", "ID", "SG"]
@@ -44,8 +48,6 @@ def clean_customer_data(df):
     return df
 
 # CASE 2
-from datetime import datetime
-
 def preprocess_time_entries(df):
     work_durations = []
     work_day_labels = []
@@ -74,7 +76,7 @@ def preprocess_time_entries(df):
         # Calculate work duration in seconds, then convert to HH:MM:SS
         if entry_time and exit_time:
             total_seconds = (exit_time - entry_time).seconds - (break_duration * 60)
-            work_duration = str(datetime.timedelta(seconds=total_seconds))
+            work_duration = str(timedelta(seconds=total_seconds))
             work_durations.append(work_duration)
         else:
             work_durations.append('Invalid Time')
@@ -103,8 +105,6 @@ def preprocess_time_entries(df):
     return df
 
 # CASE 3
-import pandas as pd
-
 def preprocess_sales_data(df):
     # Clean the 'sales_amount' column, remove currency symbols and convert to float
     sales_amounts = []
