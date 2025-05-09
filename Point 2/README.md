@@ -51,3 +51,6 @@ Point 2/
     ```
 4. Navigate to `localhost:3000` to open the Metabase dashboard. Create a new dashboard using the loaded data warehouse. Below is an example of a completed dashboard.
 ![Dashboard](./dashboard.png)
+
+# Disclaimer
+I'm using the ARM version image of Metabase to run on my machine with ARM architecture. If you're using an AMD-based machine, you'll need to change the image in `docker-compose.yaml`.
