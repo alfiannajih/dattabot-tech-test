@@ -11,6 +11,15 @@ from utils import gender_map, edu_map, province_map, age_to_birthdate, clean_pho
 REFERENCE_DATE = datetime.today()
 
 def extract(excel_path: str) -> pd.DataFrame:
+    """
+    Extracts data from all sheets in the given Excel file.
+
+    Args:
+        excel_path (str): Path to the Excel file.
+
+    Returns:
+        pd.DataFrame: Combined DataFrame containing data from all sheets.
+    """
     print(f"[INFO] Extracting data from '{excel_path}'...")
     xl = pd.ExcelFile(excel_path)
 
@@ -25,6 +34,24 @@ def extract(excel_path: str) -> pd.DataFrame:
 
 
 def transform(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Cleans and transforms the raw employee data.
+
+    Operations performed:
+        - Removes duplicate employee IDs.
+        - Maps categorical values (gender, education, province).
+        - Converts age to birth date.
+        - Converts score to numeric.
+        - Cleans phone numbers.
+        - Converts first day of employment to datetime.
+        - Renames columns to standardized format.
+
+    Args:
+        df (pd.DataFrame): Raw employee data.
+
+    Returns:
+        pd.DataFrame: Transformed employee data.
+    """
     print("[INFO] Transforming data...")
     # Drop duplicates employee id
     df = df.drop_duplicates("Employee_ID")
@@ -67,7 +94,19 @@ def transform(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def load(df: pd.DataFrame):
+def load(df: pd.DataFrame) -> None:
+    """
+    Loads the transformed employee data into a PostgreSQL database.
+
+    Creates the `employees` table if it does not exist, then inserts rows
+    with conflict handling on employee_id.
+
+    Args:
+        df (pd.DataFrame): Transformed employee data to load into the database.
+    
+    Returns:
+        None.
+    """
     print("[INFO] Loading data into database...")
     # Create SQLAlchemy engine (adjust credentials as needed)
     engine = create_engine("postgresql+psycopg2://dattabot:dattabot@localhost:5432/data_warehouse")
