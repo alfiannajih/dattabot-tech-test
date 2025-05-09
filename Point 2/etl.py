@@ -1,7 +1,6 @@
 import pandas as pd
+import numpy as np
 from datetime import datetime
-import os
-import duckdb
 import argparse
 from sqlalchemy import create_engine, Table, Column, Integer, String, Float, Date, MetaData, CHAR
 from sqlalchemy.dialects.postgresql import insert
@@ -90,6 +89,7 @@ def transform(df: pd.DataFrame) -> pd.DataFrame:
         "Domicile_Province": "domicile_province",
         "First_Day_Employment": "first_day_employement"
     }, axis=1)
+    df = df.replace({np.nan: None})
 
     return df
 
@@ -131,12 +131,13 @@ def load(df: pd.DataFrame) -> None:
     # Create the table if not exists
     metadata.create_all(engine)
 
-    # Insert data with ON CONFLICT DO NOTHING
-    with engine.connect() as conn:
-        for row in df.to_dict(orient='records'):
-            stmt = insert(employees).values(**row).on_conflict_do_nothing(index_elements=['employee_id'])
-            conn.execute(stmt)
+    # Convert all NaN/NA to None
+    records = df.to_dict(orient='records')
 
+    stmt = insert(employees).values(records).on_conflict_do_nothing(index_elements=['employee_id'])
+
+    with engine.connect() as conn:
+        conn.execute(stmt)
         conn.commit()
 
 
