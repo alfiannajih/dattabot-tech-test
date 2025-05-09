@@ -32,28 +32,31 @@ Point 1/
     ```bash
     pip install -r requirements.txt
     ```
+
 2. Run the `main.py` script
     ```bash
     python main.py
     ```
-
-# Example Output
-```
-======================================
-RUNNING SCRIPT FOR CASE 1: CUSTOMER DATA
-Time taken for original script: 4.3625 seconds
-Time taken for optimized script: 0.2105 seconds
-END OF SCRIPT FOR CASE 1: CUSTOMER DATA
-======================================
-RUNNING SCRIPT FOR CASE 2: TIME ENTRIES DATA
-Time taken for original script: 6.9253 seconds
-Time taken for optimized script: 0.9419 seconds
-END OF SCRIPT FOR CASE 2: TIME ENTRIES DATA
-======================================
-RUNNING SCRIPT FOR CASE 3: SALES DATA
-Time taken for original script: 1.2667 seconds
-Time taken for optimized script: 0.9782 seconds
-END OF SCRIPT FOR CASE 3: SALES DATA
-======================================
-```
+    
+    Example Output
+    ```
+    ======================================
+    RUNNING SCRIPT FOR CASE 1: CUSTOMER DATA
+    Time taken for original script: 4.3625 seconds
+    Time taken for optimized script: 0.2105 seconds
+    END OF SCRIPT FOR CASE 1: CUSTOMER DATA
+    ======================================
+    RUNNING SCRIPT FOR CASE 2: TIME ENTRIES DATA
+    Time taken for original script: 6.9253 seconds
+    Time taken for optimized script: 0.9419 seconds
+    END OF SCRIPT FOR CASE 2: TIME ENTRIES DATA
+    ======================================
+    RUNNING SCRIPT FOR CASE 3: SALES DATA
+    Time taken for original script: 1.2667 seconds
+    Time taken for optimized script: 0.9782 seconds
+    END OF SCRIPT FOR CASE 3: SALES DATA
+    ======================================
+    ```
 The optimized scripts **demonstrate significant improvements** in execution time across all cases.
+
+To achieve even greater scalability and efficiency—especially with larger **datasets—these scripts can be further optimized using distributed computing platforms such as Apache Spark or Dask**. These tools enable parallel processing across clustered nodes, making them ideal for big data workflows.
