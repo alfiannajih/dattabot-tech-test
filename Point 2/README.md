@@ -5,7 +5,7 @@ This directory performs an ETL (Extract, Transform, Load) process on employee da
 # Tech Stack
 1. Python: Run the ETL script.
 
-2. Docker: Containerize Metabase and PostgreSQL.
+2. Docker: Containerizes Metabase and PostgreSQL.
 
 3. PostgreSQL: Use for data warehouse
 
