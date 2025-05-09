@@ -30,17 +30,24 @@ Point 2/
     ```bash
     pip install -r requirements.txt
     ```
+
 2. Run docker container
     ```bash
     docker compose up -d
     ```
+
 3. Run the `etl.py` script
     ```bash
-    python etl.py
+    python etl.py --excel_path dataset.xlsx
     ```
+    
     Example output
     ```
-
+    [INFO] Starting ETL process...
+    [INFO] Extracting data from 'dataset.xlsx'...
+    [INFO] Transforming data...
+    [INFO] Loading data into database...
+    [INFO] ETL process completed successfully.
     ```
 4. Navigate to `localhost:3000` to open the Metabase dashboard. Create a new dashboard using the loaded data warehouse. Below is an example of a completed dashboard.
 ![Dashboard](./dashboard.png)
